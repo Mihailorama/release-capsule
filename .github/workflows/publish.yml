@@ -19,4 +19,12 @@ jobs:
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
       - run: npm test
-      - run: npm publish
+      - id: version
+        run: |
+          package_name="$(node -p \"require('./package.json').name\")"
+          package_version="$(node -p \"require('./package.json').version\")"
+          if npm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.version.outputs.already_published != 'true'
+        run: npm publish
