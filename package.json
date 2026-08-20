@@ -1,0 +1,1 @@
+{"name":"release-capsule","version":"0.1.0","private":false,"type":"module","description":"Verify hash-bound, redaction-declared data release manifests.","scripts":{"test":"node --test"},"license":"MIT","engines":{"node":">=20"}}
